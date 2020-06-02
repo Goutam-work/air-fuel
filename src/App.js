@@ -5,7 +5,9 @@ import SignIn from './components/auth/SignIn';
 import Airports from './components/airports/airports';
 import Aircrafts from './components/aircrafts/aircrafts';
 import Transactions from './components/transactions/Transactions';
+import AirportReport from './components/airports/AirportReport';
 import Navbar from './components/layouts/Navbar';
+import LandingPage from './components/layouts/LandingPage';
 
 class App extends React.Component {
   render() {
@@ -13,9 +15,11 @@ class App extends React.Component {
       <BrowserRouter>
         <Navbar/>
         <Switch>
+          <Route path='/home' component={LandingPage}></Route>
           <Route path='/airports' component={Airports}></Route>
           <Route path='/aircrafts' component={Aircrafts}></Route>
           <Route path='/transactions' component={Transactions}></Route>
+          <Route path='/report/:type' component={AirportReport}></Route>
           <Route path='/signIn' component={SignIn}></Route>
         </Switch>
       </BrowserRouter>

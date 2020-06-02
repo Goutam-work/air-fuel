@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import {sortAirport} from '../../store/actions/airportAction'
+import { NavLink } from 'react-router-dom'
+import {sortAirport,addAirport} from '../../store/actions/airportAction'
 
 class Airports extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            data : this.props.airports,
+            airport_name :"",
+            fuel_capacity :"",
+            fuel_available :"",
             columnDefs: [{
                 headerName: "Airport Name", field: "airport_name", sortable: true
               }, {
                 headerName: "Fuel Capacity", field: "fuel_capacity", sortable: true
               }, {
                 headerName: "Fuel Available", field: "fuel_available", sortable: true
-              }]
+              }],
+              domLayout: 'autoHeight',
+              defaultColDef: { resizable: true }
         }
-        this.sortAirport = this.sortAirport.bind(this);
     }
 
     sortAirport(airports, param) {
@@ -36,24 +39,64 @@ class Airports extends Component {
         this.props.sortAirport(airports);
     }
 
+    addAirport = (event) =>{
+        event.preventDefault();
+        var newAirport ={airport_name : this.state.airport_name,
+                        fuel_capacity : this.state.fuel_capacity,
+                        fuel_available : this.state.fuel_available};
+        var airportdata = { ...newAirport };
+       this.props.addAirport(airportdata);
+   }
+
+   handleInputs = (event) => {
+    this.setState({[event.target.name]: event.target.value});
+  }
+
     render() {
         return (
             <div className="container">
+                <form onSubmit = {this.addAirport}>
+                    <div className="form-group row">
+                        <label htmlFor="airport_name" className="col-sm-3">Airport Name</label>
+                        <div className="col-sm-7">
+                            <input type="text" name="airport_name" className="form-control" value={this.state.airport_name} id="airport_name" placeholder="Enter Airport Name" onChange={this.handleInputs}></input>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="fuel_capacity" className="col-sm-3">Fuel Capacity</label>
+                        <div className="col-sm-7">
+                            <input type="number" name="fuel_capacity" className="form-control" value={this.state.fuel_capacity} id="fuel_capacity" placeholder="Enter Fuel Capacity" onChange={this.handleInputs}></input>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="fuel_available" className="col-sm-3">Fuel Available</label>
+                        <div className="col-sm-7">
+                            <input type="number" name="fuel_available" className="form-control" value={this.state.fuel_available} id="fuel_available" placeholder="Enter Fuel Available" onChange={this.handleInputs}></input>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <button type="submit">Add</button>
+                    </div>
+                </form>
+                
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-8">
                         <div
                             className="ag-theme-alpine"
-                            style={{
-                            height: '300px',
-                            width: '600px' }}
                         >
                             <AgGridReact
                             columnDefs={this.state.columnDefs}
-                            rowData={this.state.data}>
+                            rowData={this.props.airports}
+                            domLayout={this.state.domLayout}
+                            defaultColDef={this.state.defaultColDef}>
                             </AgGridReact>
                         </div>
                     </div>
                 </div>
+                <NavLink to="/report/airport" className="nav-link">
+                    <button type="button" class="btn btn-primary">Report</button>
+                </NavLink>
+                
             </div>
         )
     }
@@ -66,9 +109,10 @@ const mapStateToProps = (state) => {
 }
   
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-        sortAirport:sortAirport
-    },dispatch);
+    return {
+        sortAirport: () => dispatch(sortAirport()),
+        addAirport: airport => dispatch(addAirport(airport))
+    };
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Airports);

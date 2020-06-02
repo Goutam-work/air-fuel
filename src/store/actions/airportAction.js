@@ -6,9 +6,16 @@ export function sortAirport(airport)
     }
 }
 
+export function addAirport(airport)
+{
+    return {
+    type:'ADD_AIRPORT',
+    payload:airport
+    }
+}
+
 export const updateAirport = (transaction, reverse) => {
-    console.log(reverse);
     return (dispatch, getState) => {
         dispatch({ type:'UPDATE_AIRPORT', payload:transaction, isReverse: reverse });
     }
-};
+}; 

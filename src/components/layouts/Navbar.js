@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import SignedInLinks from './SignedInLinks'
-import SignedOutLinks from './SignedOutLinks'
+import TabLinks from './TabLinks'
+import SignInLinks from './SignInLinks'
+import { NavLink } from 'react-router-dom'
 
 class Navbar extends Component {
     constructor(props) {
@@ -12,15 +13,15 @@ class Navbar extends Component {
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <span className="navbar-brand">Airport</span>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+                <NavLink to="/home" className="nav-link">
+                    <span className="red big">Air</span>
+                    <span className="blue big">Fuel</span>
+                </NavLink>
+                
                 <div className="collapse navbar-collapse" id="navbarText">
-                        <SignedInLinks/>
-                        <SignedOutLinks/>
+                        <TabLinks/>
                     <span className="navbar-text">
-                        Navbar text with an inline element
+                        <SignInLinks/>
                     </span>
                 </div>
             </nav>

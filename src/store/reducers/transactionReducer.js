@@ -25,19 +25,15 @@ const transactionReducer = (state = initialState, action) => {
                                             quantity: action.payload.quantity,
                                             isReverse: false
                                         }]}});
-            console.log( stateCopy);
             return stateCopy
 
         case 'REVERSE_TRANSACTION':
-            console.log(action.payload);
             for (var i=0; i < state.transactions.length; i++) {
                 if (state.transactions[i].transaction_id === action.payload) {
                     var reverseIndex = i;
                 }
             }
-            console.log(reverseIndex);
-            stateCopy = update(state, {transactions: {[reverseIndex]: { isReverse: {$set: true}}}});   
-            console.log(stateCopy);                          
+            stateCopy = update(state, {transactions: {[reverseIndex]: { isReverse: {$set: true}}}});
             return stateCopy
 
         default:

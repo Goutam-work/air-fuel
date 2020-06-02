@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {addTransaction, reverseTransaction, updateAirport} from '../../store/actions/transactionAction'
+import {addTransaction, reverseTransaction} from '../../store/actions/transactionAction'
+import {updateAirport} from '../../store/actions/airportAction'
 import CreateTransaction from './CreateTransaction.js'
+import { NavLink } from 'react-router-dom'
 
-class Transactions extends Component {
+class Transactions extends Component { 
     constructor(props) {
         super(props)
         this.state = {
@@ -31,6 +33,9 @@ class Transactions extends Component {
                 <div className="row">
                     <CreateTransaction airports={airport_data} aircrafts={aircrafts} transactions={transactions} onSave = {this.onSave} onReverse = {this.onReverse} />
                 </div>
+                <NavLink to="/report/fuel" className="nav-link">
+                    <button type="button" class="btn btn-primary">Report</button>
+                </NavLink>
             </div>
         )
     }

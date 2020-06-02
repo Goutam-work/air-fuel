@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 
-class SignedOutLinks extends Component {
+class SignInLinks extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -19,4 +19,4 @@ class SignedOutLinks extends Component {
     }
 }
 
-export default SignedOutLinks;
+export default SignInLinks;
