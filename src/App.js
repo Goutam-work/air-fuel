@@ -29,6 +29,7 @@ class App extends React.Component {
           <Route path='/transactions' component={Transactions}></Route>
           <Route path='/report/:type' component={AirportReport}></Route>
           <Route path='/logout' component={Logout}></Route>
+          <Redirect to='/'/>
       </Switch>);
     }
     return (

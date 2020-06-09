@@ -34,7 +34,7 @@ class Transactions extends Component {
                     <CreateTransaction airports={airport_data} aircrafts={aircrafts} transactions={transactions} onSave = {this.onSave} onReverse = {this.onReverse} />
                 </div>
                 <NavLink to="/report/fuel" className="nav-link">
-                    <button type="button" class="btn btn-primary">Report</button>
+                    <button type="button" className="btn btn-primary">Report</button>
                 </NavLink>
             </div>
         )

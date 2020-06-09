@@ -94,7 +94,7 @@ class Airports extends Component {
                     </div>
                 </div>
                 <NavLink to="/report/airport" className="nav-link">
-                    <button type="button" class="btn btn-primary">Report</button>
+                    <button type="button" className="btn btn-primary">Report</button>
                 </NavLink>
                 
             </div>

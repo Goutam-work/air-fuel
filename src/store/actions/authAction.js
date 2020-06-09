@@ -2,7 +2,8 @@ export const auth = (email, password) => {
     
     return (dispatch, getState) => {
         dispatch(authStart());
-        dispatch({ type:'AUTHENTICATE', email:email, password: password });
+        dispatch(authProcess(email, password));
+        dispatch(checkAuthTimeout(3600));
     }
 };
 
@@ -12,17 +13,11 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (authData) => {
+export const authProcess = (email, password) => {
     return {
-        type: 'AUTH_SUCCESS',
-        authData: authData
-    };
-};
-
-export const authFail = (error) => {
-    return {
-        type: 'AUTH_FAIL',
-        error: error
+        type: 'AUTH_PROCESS',
+        email:email,
+        password: password
     };
 };
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import {auth} from '../../store/actions/authAction'
 
 class SignIn extends Component {
@@ -56,7 +57,8 @@ class SignIn extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isLoggedIn: state.auth.token !== null
     };
 };
 const mapDispatchToProps = dispatch => {

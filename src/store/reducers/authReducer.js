@@ -13,8 +13,16 @@ const authReducer = (state = defaultState, action) => {
     //return state
     switch(action.type){
 
-        case 'AUTHENTICATE':
-            console.log(state);
+        case 'AUTH_START':
+            
+            return {
+                ...state,
+                error: null,
+                loading: true
+            }
+
+        case 'AUTH_PROCESS':
+            
             if(action.email == state.user.email && action.password == state.user.password){
                 return {
                     ...state,
@@ -29,33 +37,6 @@ const authReducer = (state = defaultState, action) => {
                     error:'Wrong Credentials',
                     loading: false
                   }
-            }
-
-        case 'AUTH_START':
-            
-            return {
-                ...state,
-                error: null,
-                loading: true
-            }
-
-        case 'AUTH_SUCCESS':
-            
-            return {
-                ...state,
-                    token: action.idToken,
-                    userId: action.userId,
-                    error: null,
-                    loading: false
-            }
-
-        case 'AUTH_FAIL':
-        
-            return {
-                ...state,
-                    error: action.error,
-                    loading: false
-                
             }
 
         case 'AUTH_LOGOUT':
