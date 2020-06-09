@@ -11,7 +11,6 @@ export const reverseTransaction = (transaction_Id) => {
 };
 
 export const updateAirport = (transaction, reverse) => {
-    console.log(reverse);
     return (dispatch, getState) => {
         dispatch({ type:'UPDATE_AIRPORT', payload:transaction, isReverse: reverse });
     }
